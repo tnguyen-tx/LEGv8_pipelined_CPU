@@ -21,38 +21,37 @@ module ALU(BusW, Zero , BusA , BusB , ALUCtrl);
     
 	//Behavioral clock
     always @(ALUCtrl or BusA or BusB) begin
-        case(ALUCtrl)
-            `AND1: begin
-                BusW <= #20 BusA&BusB;
-            end
-            `OR1: begin
-                BusW <= #20 BusA|BusB;
-            end
-			`ADD1: begin
-                BusW <= #20 BusA+BusB;
-            end
-			`LSL1: begin
-                BusW <= #20 BusA<<BusB;
-            end
-			`LSR1: begin
-                BusW <= #20 BusA>>BusB;
-            end
-			`SUB1: begin
-                BusW <= #20 BusA-BusB;
-            end
-			`PassB1: begin
-                BusW <= #20 BusB;
-            end
-			
+       	case(ALUCtrl)
+            	`AND1: begin
+                	BusW = BusA&BusB;
+            	end
+            	`OR1: begin
+                	BusW = BusA|BusB;
+            	end
+		`ADD1: begin
+                	BusW = BusA+BusB;
+            	end
+		`LSL1: begin
+                	BusW = BusA<<BusB;
+            	end
+		`LSR1: begin
+                	BusW = BusA>>BusB;
+            	end
+		`SUB1: begin
+                	BusW = BusA-BusB;
+            	end
+		`PassB1: begin
+                	BusW = BusB;
+            	end	
         endcase
     end
 	
 	always@(*)
 	begin 
 	if (BusW == 64'b0)
-		#1 assign  Zero = 1'b1; 
+		Zero = 1'b1; 
 	else 
-		#1 assign  Zero =1'b0;
+		Zero =1'b0;
 	end
 	
 endmodule
