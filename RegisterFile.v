@@ -30,7 +30,7 @@ module RegisterFile(BusA, BusB, BusW, RA, RB, RW, RegWr, Clk);
 	end
 	
 	always @ (posedge Clk) begin		//change the value of register RW 
-		if((RegWr != 'd31))
-				registers[RW] <= BusW;
+		if((RegWr == 1'b1) && (RW != 'd31))
+			registers[RW] <= BusW;
 		end
 endmodule
